@@ -1,0 +1,9 @@
+Timer Operation: Instead of continuously checking timer values in a while loop, this code configures the timer to generate interrupts at the desired sampling rate (10ms, 100ms, 500ms, or 1000ms).
+
+ADC Conversion: The ADC is triggered by timer interrupts and uses the HAL_ADC_Start_IT() function to start conversions in interrupt mode, with results processed in the HAL_ADC_ConvCpltCallback().
+
+UART Reception: Commands are received through interrupts with HAL_UART_Receive_IT(), and processed when the callback sets the command_received flag.
+
+Event Handling: The code uses callback functions (HAL_TIM_PeriodElapsedCallback, HAL_ADC_ConvCpltCallback, HAL_UART_RxCpltCallback) to handle events when they occur, rather than polling for them.
+
+CPU Efficiency: The CPU is free to perform other tasks between interrupts, rather than being tied up in busy-wait loops.
